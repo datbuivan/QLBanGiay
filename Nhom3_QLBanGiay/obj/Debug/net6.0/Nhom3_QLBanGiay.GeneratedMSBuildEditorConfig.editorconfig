@@ -5,81 +5,84 @@ build_property.UsingMicrosoftNETSdkWeb = true
 build_property.ProjectTypeGuids = 
 build_property.InvariantGlobalization = 
 build_property.PlatformNeutralAssembly = 
-build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Nhom3_QLBanGiay
 build_property.RootNamespace = Nhom3_QLBanGiay
-build_property.ProjectDir = D:\NAM3\KY2\LapTrinhWeb\BTL\Nhom3_QLBanGiay\Nhom3_QLBanGiay\
+build_property.ProjectDir = D:\Source Code\HK6\LTWeb\QLBanGiay\Nhom3_QLBanGiay\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\NAM3\KY2\LapTrinhWeb\BTL\Nhom3_QLBanGiay\Nhom3_QLBanGiay
+build_property.MSBuildProjectDirectory = D:\Source Code\HK6\LTWeb\QLBanGiay\Nhom3_QLBanGiay
 build_property._RazorSourceGeneratorDebug = 
 
-[D:/NAM3/KY2/LapTrinhWeb/BTL/Nhom3_QLBanGiay/Nhom3_QLBanGiay/Views/Home/ChiTietSanPham.cshtml]
+[D:/Source Code/HK6/LTWeb/QLBanGiay/Nhom3_QLBanGiay/Views/Access/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjZXNzXExvZ2luLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Source Code/HK6/LTWeb/QLBanGiay/Nhom3_QLBanGiay/Views/Home/ChiTietSanPham.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDaGlUaWV0U2FuUGhhbS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/NAM3/KY2/LapTrinhWeb/BTL/Nhom3_QLBanGiay/Nhom3_QLBanGiay/Views/Home/Index.cshtml]
+[D:/Source Code/HK6/LTWeb/QLBanGiay/Nhom3_QLBanGiay/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/NAM3/KY2/LapTrinhWeb/BTL/Nhom3_QLBanGiay/Nhom3_QLBanGiay/Views/Home/Privacy.cshtml]
+[D:/Source Code/HK6/LTWeb/QLBanGiay/Nhom3_QLBanGiay/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/NAM3/KY2/LapTrinhWeb/BTL/Nhom3_QLBanGiay/Nhom3_QLBanGiay/Views/Shared/Error.cshtml]
+[D:/Source Code/HK6/LTWeb/QLBanGiay/Nhom3_QLBanGiay/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/NAM3/KY2/LapTrinhWeb/BTL/Nhom3_QLBanGiay/Nhom3_QLBanGiay/Views/Shared/_LayoutShoes.cshtml]
+[D:/Source Code/HK6/LTWeb/QLBanGiay/Nhom3_QLBanGiay/Views/Shared/_LayoutShoes.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRTaG9lcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/NAM3/KY2/LapTrinhWeb/BTL/Nhom3_QLBanGiay/Nhom3_QLBanGiay/Views/Shared/_PartialCatagory.cshtml]
+[D:/Source Code/HK6/LTWeb/QLBanGiay/Nhom3_QLBanGiay/Views/Shared/_PartialCatagory.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9QYXJ0aWFsQ2F0YWdvcnkuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/NAM3/KY2/LapTrinhWeb/BTL/Nhom3_QLBanGiay/Nhom3_QLBanGiay/Views/Shared/_PartialFooter.cshtml]
+[D:/Source Code/HK6/LTWeb/QLBanGiay/Nhom3_QLBanGiay/Views/Shared/_PartialFooter.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9QYXJ0aWFsRm9vdGVyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/NAM3/KY2/LapTrinhWeb/BTL/Nhom3_QLBanGiay/Nhom3_QLBanGiay/Views/Shared/_PartialHeader.cshtml]
+[D:/Source Code/HK6/LTWeb/QLBanGiay/Nhom3_QLBanGiay/Views/Shared/_PartialHeader.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9QYXJ0aWFsSGVhZGVyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/NAM3/KY2/LapTrinhWeb/BTL/Nhom3_QLBanGiay/Nhom3_QLBanGiay/Views/Shared/_PartialHero.cshtml]
+[D:/Source Code/HK6/LTWeb/QLBanGiay/Nhom3_QLBanGiay/Views/Shared/_PartialHero.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9QYXJ0aWFsSGVyby5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/NAM3/KY2/LapTrinhWeb/BTL/Nhom3_QLBanGiay/Nhom3_QLBanGiay/Views/Shared/_PartialInstagram.cshtml]
+[D:/Source Code/HK6/LTWeb/QLBanGiay/Nhom3_QLBanGiay/Views/Shared/_PartialInstagram.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9QYXJ0aWFsSW5zdGFncmFtLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/NAM3/KY2/LapTrinhWeb/BTL/Nhom3_QLBanGiay/Nhom3_QLBanGiay/Views/Shared/_PartialLatest.cshtml]
+[D:/Source Code/HK6/LTWeb/QLBanGiay/Nhom3_QLBanGiay/Views/Shared/_PartialLatest.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9QYXJ0aWFsTGF0ZXN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/NAM3/KY2/LapTrinhWeb/BTL/Nhom3_QLBanGiay/Nhom3_QLBanGiay/Views/Shared/_PartialProductSection.cshtml]
+[D:/Source Code/HK6/LTWeb/QLBanGiay/Nhom3_QLBanGiay/Views/Shared/_PartialProductSection.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9QYXJ0aWFsUHJvZHVjdFNlY3Rpb24uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/NAM3/KY2/LapTrinhWeb/BTL/Nhom3_QLBanGiay/Nhom3_QLBanGiay/Views/Shared/_PartialSP.cshtml]
+[D:/Source Code/HK6/LTWeb/QLBanGiay/Nhom3_QLBanGiay/Views/Shared/_PartialSP.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9QYXJ0aWFsU1AuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/NAM3/KY2/LapTrinhWeb/BTL/Nhom3_QLBanGiay/Nhom3_QLBanGiay/Views/Shared/_ValidationScriptsPartial.cshtml]
+[D:/Source Code/HK6/LTWeb/QLBanGiay/Nhom3_QLBanGiay/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/NAM3/KY2/LapTrinhWeb/BTL/Nhom3_QLBanGiay/Nhom3_QLBanGiay/Views/_ViewImports.cshtml]
+[D:/Source Code/HK6/LTWeb/QLBanGiay/Nhom3_QLBanGiay/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/NAM3/KY2/LapTrinhWeb/BTL/Nhom3_QLBanGiay/Nhom3_QLBanGiay/Views/_ViewStart.cshtml]
+[D:/Source Code/HK6/LTWeb/QLBanGiay/Nhom3_QLBanGiay/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/NAM3/KY2/LapTrinhWeb/BTL/Nhom3_QLBanGiay/Nhom3_QLBanGiay/Views/Shared/_Layout.cshtml]
+[D:/Source Code/HK6/LTWeb/QLBanGiay/Nhom3_QLBanGiay/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-cj2fjj0zp9

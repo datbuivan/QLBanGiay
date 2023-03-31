@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Bai2.Models.Authentication;
+using Microsoft.AspNetCore.Mvc;
 using Nhom3_QLBanGiay.Models;
 using System.Data.Entity;
 using System.Diagnostics;
@@ -16,6 +17,7 @@ namespace Nhom3_QLBanGiay.Controllers
             _logger = logger;
         }
 
+        [Authentication]
         public IActionResult Index(int? page)
         {
             int pageNumber = page == null || page < 1 ? 1 : page.Value;
