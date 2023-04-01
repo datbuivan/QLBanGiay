@@ -19,13 +19,15 @@
         <div class="row product__filter" id="MixItUpC3C79E">
             @foreach (var item in Model)
             {
+                <div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
                 @await Html.PartialAsync("~/Views/Shared/_PartialSP.cshtml",item)
+                </div>
             }
-            @Html.PagedListPager(Model,page => Url.Action("Index", new {page=page}),new X.PagedList.Web.Common.PagedListRenderOptions(){
-            LiElementClasses = new List<String> {"page-item"},
-            PageClasses = new List<String> {"page-link"}
-            })
         </div>
+        @Html.PagedListPager(Model,page => Url.Action("Index", new {page=page}),new X.PagedList.Web.Common.PagedListRenderOptions(){
+        LiElementClasses = new List<String> {"page-item"},
+        PageClasses = new List<String> {"page-link"}
+        })
     </div>
    
 </section>

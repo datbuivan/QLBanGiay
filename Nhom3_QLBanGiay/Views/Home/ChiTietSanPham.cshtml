@@ -1,4 +1,5 @@
 ﻿@model Nhom3_QLBanGiay.Models.SanPham
+using 
 @{
     ViewData["Title"] = "ChiTietSanPham";
     Layout = "~/Views/Shared/_LayoutShoes.cshtml";
@@ -96,22 +97,17 @@
                             <div class="product__details__option">
                                 <div class="product__details__option__size">
                                     <span>Size:</span>
-                                    <label for="xxl">
-                                        xxl
-                                        <input type="radio" id="xxl">
-                                    </label>
-                                    <label class="active" for="xl">
-                                        xl
-                                        <input type="radio" id="xl">
-                                    </label>
-                                    <label for="l">
-                                        l
-                                        <input type="radio" id="l">
-                                    </label>
-                                    <label for="sm">
-                                        s
-                                        <input type="radio" id="sm">
-                                    </label>
+                                    @if (ViewData["SizeSP"] != null)
+                                    {
+                                        @foreach (var size in (List<String>)ViewData["SizeSP"])
+                                        {
+                                        <label for="@size">
+                                            @size
+                                            <input type="radio" id="@size">
+                                            </label>
+                                        }
+                                    
+                                    }
                                 </div>
                                 <div class="product__details__option__color">
                                     <span>Color:</span>
