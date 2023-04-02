@@ -1,9 +1,9 @@
-﻿
+﻿@model Nhom3_QLBanGiay.Models.User
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
 @{
     Layout = null;
 }
-
-@model User
 
 <!DOCTYPE html>
 <html>
@@ -93,25 +93,28 @@
 			height: 460px;
 			background: #eee;
 			border-radius: 60% / 10%;
-			transform: translateY(-180px);
+			transform: translateY(-500px);
 			transition: .8s ease-in-out;
 		}
 
-			.login label {
-				color: #573b8a;
-				transform: scale(.6);
-			}
-
-		#chk:checked ~ .login {
-			transform: translateY(-500px);
+		.signup label {
+			transform: scale(.5);
 		}
 
-			#chk:checked ~ .login label {
-				transform: scale(1);
-			}
+		.login label {
+			color: #573b8a;
+		}
+
+		#chk:checked ~ .login {
+			transform: translateY(-180px);
+		}
+
+		#chk:checked ~ .login label {
+			transform: scale(.6);
+		}
 
 		#chk:checked ~ .signup label {
-			transform: scale(.6);
+			transform: scale(1);
 		}
 	</style>
 </head>
@@ -120,11 +123,10 @@
 		<input type="checkbox" id="chk" aria-hidden="true">
 
 			<div class="signup">
-				<form>
+				<form method="post">
 					<label for="chk" aria-hidden="true">Sign up</label>
-					@Html.TextBoxFor(x=>x.UserName, new{placeholder="User name", required="required", autofocus="autofocus"})
 					@Html.TextBoxFor(x=>x.UserName, new{placeholder="Email", required="required", autofocus="autofocus"})
-					@Html.TextBoxFor(x=>x.UserName, new{placeholder="Password", required="required", autofocus="autofocus"})
+					@Html.TextBoxFor(x=>x.PassWord, new{placeholder="Password", required="required", autofocus="autofocus", })
 					<button>Sign up</button>
 				</form>
 			</div>
@@ -133,7 +135,7 @@
 				@using(Html.BeginForm("Login", "Access", FormMethod.Post)){
 					<label for="chk" aria-hidden="true">Login</label>
 					@Html.TextBoxFor(x=>x.UserName, new{placeholder="Email", required="required", autofocus="autofocus"})
-					@Html.TextBoxFor(x=>x.PassWord, new{placeholder="Password", required="required", autofocus="autofocus" ,type="Password"})
+					@Html.TextBoxFor(x=>x.PassWord, new{placeholder="Password", required="required", autofocus="autofocus" ,type="Password", })
 					<button>Login</button>
 				}
 			</div>
