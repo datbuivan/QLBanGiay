@@ -4,30 +4,46 @@
     ViewData["Title"] = "Home Page";
     Layout = "~/Views/Shared/_LayoutShoes.cshtml";
 }
-@await Html.PartialAsync("~/Views/Shared/_PartialHero.cshtml")
-<section class="product spad">
+<section class="shop spad">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12">
-                <ul class="filter__controls">
-                    <li class="active" data-filter="*">Best Sellers</li>
-                    <li data-filter=".new-arrivals">New Arrivals</li>
-                    <li data-filter=".hot-sales">Hot Sales</li>
-                </ul>
+            <div class="col-lg-3">
+                @await Html.PartialAsync("~/Views/Shared/_PartialSidebar.cshtml")
+            </div>
+            <div class="col-lg-9">
+                <div class="shop__product__option">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="shop__product__option__left">
+                                <p>Showing 1–12 of 126 results</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="shop__product__option__right">
+                                <p>Sort by Price:</p>
+                                <select style="display: none;">
+                                    <option value="">Low To High</option>
+                                    <option value="">$0 - $55</option>
+                                    <option value="">$55 - $100</option>
+                                </select><div class="nice-select" tabindex="0"><span class="current">Low To High</span><ul class="list"><li data-value="" class="option selected">Low To High</li><li data-value="" class="option">$0 - $55</li><li data-value="" class="option">$55 - $100</li></ul></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-md-6 col-sm-6">
+                            @await Html.PartialAsync("~/Views/Shared/_PartialSP.cshtml",item)
+                        </div>
+                    }
+                </div>
+                @Html.PagedListPager(Model,page => Url.Action("SanPhamTheoLoai", new {page=page,MaLoai=ViewBag.MaLoaiSp}),new X.PagedList.Web.Common.PagedListRenderOptions(){
+                LiElementClasses = new List<String> {"page-item"},
+                PageClasses = new List<String> {"page-link"}
+                })
             </div>
         </div>
-        <div class="row product__filter" id="MixItUpC3C79E">
-            <div class="col-lg-3 col-md-6 col-sm-6 col-md-6 col-sm-6 mix new-arrivals">
-                @foreach (var item in Model)
-                {
-                    @await Html.PartialAsync("~/Views/Shared/_PartialSP.cshtml",item)
-                }
-            </div>
-        </div>
-        @Html.PagedListPager(Model,page => Url.Action("SanPhamTheoLoai", new {page=page,MaLoai=ViewBag.MaLoaiSp}),new X.PagedList.Web.Common.PagedListRenderOptions(){
-        LiElementClasses = new List<String> {"page-item"},
-        PageClasses = new List<String> {"page-link"}
-        })
     </div>
-
 </section>
+

@@ -1,0 +1,50 @@
+﻿@model IEnumerable<LoaiSp>
+<div class="card-heading">
+    <a data-toggle="collapse" data-target="#collapseOne">Loại Sản Phẩm</a>
+</div>
+<div id="collapseOne" class="collapse show" data-parent="#accordionExample">
+    <div class="card-body">
+        <div class="shop__sidebar__categories">
+            <ul class="nice-scroll" tabindex="1" style="overflow-y: hidden; outline: none;">
+                @foreach(var loaisp in Model)
+                {
+                    <li><a asp-action="SanPhamTheoLoai" asp-controller="Home" asp-route-maloai="@loaisp.MaLoaiSp">@loaisp.TenLoaiSp</a></li>
+                }              
+            </ul>
+        </div>
+    </div>
+</div>
+@*<script>
+    function showProductsByCategory(getUrl){
+        var str='';
+        $.ajax({
+            type:'GET',
+            url: getUrl,
+            dataType: 'json',
+            errol: function(response){
+                console.log(response);
+            },
+            success: function(data){
+                $.each(data,function(key,val){
+                    //str+='<p>'+val.tenSp+'</p>';
+                    str += `<div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat" >
+                        <div class="featured__item" >
+                                <div class="featured__item__pic set-bg" data - setbg="../Products/Images/${val.anhDaiDien}" style = "background-image: url(&quot;../Products/Images/${val.anhDaiDien}&quot;);" >
+                                <ul class="featured__item__pic__hover" >
+                                    <li><a href="#" > <i class="fa fa-heart" > </i></a > </li>
+                                        <li> <a href="#" > <i class="fa fa-retweet" > </i></a > </li>
+                                            <li> <a href="#" > <i class="fa fa-shopping-cart" > </i></a > </li>
+                                                </ul>
+                                                </div>
+                                                <div class="featured__item__text" >
+                                                    <h6 href="/Home/ChiTietSanPham?maSp =${val.maSp}" > ${val.tenSp}</a></h6>
+                                                        <h5>${val.giaLonNhat} đồng </h5>
+                                                        </div>
+                                                        </div>
+                                                        </div>`;
+                });
+                $('#displayProducts').html(str);
+            }
+        });
+    }
+</script>*@

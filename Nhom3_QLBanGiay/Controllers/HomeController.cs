@@ -49,7 +49,7 @@ namespace Nhom3_QLBanGiay.Controllers
         public IActionResult Shop(int? page)
         {
             int pageNumber = page == null || page < 1 ? 1 : page.Value;
-            int pageSize = 12;
+            int pageSize = 6;
             var lstSanpham = db.SanPhams.AsNoTracking().OrderBy(x => x.MaSanPham);
             PagedList<SanPham> lst = new PagedList<SanPham>(lstSanpham, pageNumber, pageSize);
             return View(lst);
@@ -57,10 +57,10 @@ namespace Nhom3_QLBanGiay.Controllers
         public IActionResult SanPhamTheoLoai(string MaLoai, int? page)
         {
             int pageNumber = page == null || page < 1 ? 1 : page.Value;
-            int pageSize = 12;
+            int pageSize = 6;
             var lstSanpham = db.SanPhams.AsNoTracking().Where(x => x.MaLoaiSp == MaLoai).OrderBy(x => x.TenSanPham);
             PagedList<SanPham> lst = new PagedList<SanPham>(lstSanpham, pageNumber, pageSize);
-            ViewBag.MaLoaiSp= MaLoai;
+            ViewBag.MaLoaiSp = MaLoai;
             return View(lst);
             //List<TDanhMucSp> lstsanpham = db.TDanhMucSps.Where(x=>x.MaLoai==MaLoai).ToList();
             //return View(lstsanpham); 
