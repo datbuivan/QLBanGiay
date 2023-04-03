@@ -37,21 +37,24 @@ namespace Nhom3_QLBanGiay.Controllers
                         HttpContext.Session.SetString("Role", u.Role.ToString());
                         if(HttpContext.Session.GetString("Role") == "0")
                         {
-                            return View();
-                        }else
+                            return RedirectToAction("Privacy", "Home");
+                        }
+                        else
                         {
                             return RedirectToAction("Index", "Home");
                         }
                 }
             }
-            return View(user);
-
+            
             if (ModelState.IsValid)
             {
                 db.Users.Add(user);
                 db.SaveChanges();
                 return RedirectToAction("Login", "access");
             }
+
+
+            return View(user);
         }
 
 

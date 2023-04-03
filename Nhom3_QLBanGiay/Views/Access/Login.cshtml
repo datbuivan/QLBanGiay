@@ -125,9 +125,10 @@
 			<div class="signup">
 				<form method="post">
 					<label for="chk" aria-hidden="true">Sign up</label>
-					@Html.TextBoxFor(x=>x.UserName, new{placeholder="Email", required="required", autofocus="autofocus"})
-					@Html.TextBoxFor(x=>x.PassWord, new{placeholder="Password", required="required", autofocus="autofocus", })
-					<button>Sign up</button>
+					<input asp-for="UserName" class="form-control" />
+					<input asp-for="PassWord" class="form-control" />
+					<input asp-for="Role" class="form-control" value="1" style="display: none"/>
+					<button type="submit" value="Create">Sign up</button>
 				</form>
 			</div>
 
