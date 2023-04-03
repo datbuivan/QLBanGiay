@@ -1,4 +1,4 @@
-﻿@model Nhom3_QLBanGiay.Models.User
+﻿ @model Nhom3_QLBanGiay.Models.User
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 @{
@@ -25,7 +25,7 @@
 
 		.main {
 			width: 350px;
-			height: 500px;
+			height: 500px ;
 			background: red;
 			overflow: hidden;
 			background: url("https://doc-08-2c-docs.googleusercontent.com/docs/securesc/68c90smiglihng9534mvqmq1946dmis5/fo0picsp1nhiucmc0l25s29respgpr4j/1631524275000/03522360960922298374/03522360960922298374/1Sx0jhdpEpnNIydS4rnN4kHSJtU1EyWka?e=view&authuser=0&nonce=gcrocepgbb17m&user=03522360960922298374&hash=tfhgbs86ka6divo3llbvp93mg4csvb38") no-repeat center/ cover;
@@ -116,6 +116,15 @@
 		#chk:checked ~ .signup label {
 			transform: scale(1);
 		}
+
+		.error{
+			margin-left: 70px;
+			display: flex;
+			border: none;
+			outline: none;
+			font-size: 14px;
+			color: red;
+		}
 	</style>
 </head>
 <body>
@@ -123,23 +132,28 @@
 		<input type="checkbox" id="chk" aria-hidden="true">
 
 			<div class="signup">
-				<form method="post">
-					<label for="chk" aria-hidden="true">Sign up</label>
-					<input asp-for="UserName" class="form-control" />
-					<input asp-for="PassWord" class="form-control" />
-					<input asp-for="Role" class="form-control" value="1" style="display: none"/>
-					<button type="submit" value="Create">Sign up</button>
-				</form>
+			@using (Html.BeginForm("Login", "Access", FormMethod.Post))
+			{
+				<label for="chk" aria-hidden="true">Login</label>
+				@Html.TextBoxFor(x=>x.UserName, new{placeholder="Email", required="required", autofocus="autofocus", type="text"})
+				@Html.TextBoxFor(x=>x.PassWord, new{placeholder="Password", required="required", autofocus="autofocus" ,type="password" })
+				<button>Login</button>
+			}
 			</div>
 
 			<div class="login">
-				@using(Html.BeginForm("Login", "Access", FormMethod.Post)){
-					<label for="chk" aria-hidden="true">Login</label>
-					@Html.TextBoxFor(x=>x.UserName, new{placeholder="Email", required="required", autofocus="autofocus"})
-					@Html.TextBoxFor(x=>x.PassWord, new{placeholder="Password", required="required", autofocus="autofocus" ,type="Password", })
-					<button>Login</button>
-				}
+				
+			<form method="post">
+				<label for="chk" aria-hidden="true">Sign up</label>
+				<input  type="text" placeholder="Email" asp-for="UserName" />
+				<span class="error" asp-validation-for="UserName"></span>
+				<input type="password" placeholder="Password" asp-for="PassWord"/>
+				<span class="error" asp-validation-for="PassWord"></span>
+				<input asp-for="Role" class="form-control" value="1" style="display: none" />
+				<button onclick="submit">Sign up</button>
+			</form>
 			</div>
 	</div>
+
 </body>
 </html>

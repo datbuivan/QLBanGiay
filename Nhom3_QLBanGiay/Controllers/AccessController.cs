@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 using Nhom3_QLBanGiay.Models;
 
 namespace Nhom3_QLBanGiay.Controllers
