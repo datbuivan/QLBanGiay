@@ -7,43 +7,50 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Nhom3_QLBanGiay.styles.css" asp-append-version="true" />
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="../Shoes/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="../Shoes/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="../Shoes/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="../Shoes/css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="../Shoes/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="../Shoes/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="../Shoes/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="../Shoes/css/style.css" type="text/css">
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Nhom3_QLBanGiay</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+    @await Html.PartialAsync("_PartialHeader")
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - Nhom3_QLBanGiay - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+    @await Html.PartialAsync("_PartialFooter")
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
+    <!-- Search Begin -->
+    <div class="search-model">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="search-close-switch">+</div>
+            <form class="search-model-form">
+                <input type="text" id="search-input" placeholder="Search here.....">
+            </form>
+        </div>
+    </div>
+    <!-- Search End -->
+    <!-- Js Plugins -->
+    <script src="../Shoes/js/jquery-3.3.1.min.js"></script>
+    <script src="../Shoes/js/bootstrap.min.js"></script>
+    <script src="../Shoes/js/jquery.nice-select.min.js"></script>
+    <script src="../Shoes/js/jquery.nicescroll.min.js"></script>
+    <script src="../Shoes/js/jquery.magnific-popup.min.js"></script>
+    <script src="../Shoes/js/jquery.countdown.min.js"></script>
+    <script src="../Shoes/js/jquery.slicknav.js"></script>
+    <script src="../Shoes/js/mixitup.min.js"></script>
+    <script src="../Shoes/js/owl.carousel.min.js"></script>
+    <script src="../Shoes/js/main.js"></script>
 </body>
 </html>

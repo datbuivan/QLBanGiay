@@ -9,6 +9,12 @@ builder.Services.AddControllersWithViews();
 var connectionString = builder.Configuration.GetConnectionString("QlbanGiayContext");
 builder.Services.AddDbContext<QlbanGiayContext>(x => x.UseSqlServer(connectionString));
 builder.Services.AddScoped<ILoaiSpRepository, LoaiSpRepository>();
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(cfg =>
+{
+    cfg.Cookie.Name = "nhom3";
+    cfg.IOTimeout = new TimeSpan(0, 30, 0);
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -21,7 +27,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+app.UseSession();
 app.UseRouting();
 
 app.UseAuthorization();
