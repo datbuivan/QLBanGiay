@@ -63,9 +63,20 @@ namespace Nhom3_QLBanGiay.Controllers
             PagedList<SanPham> lst = new PagedList<SanPham>(lstSanpham, pageNumber, pageSize);
             ViewBag.MaLoaiSp = MaLoai;
             return View(lst);
-            //List<TDanhMucSp> lstsanpham = db.TDanhMucSps.Where(x=>x.MaLoai==MaLoai).ToList();
-            //return View(lstsanpham); 
         }
+        //public IActionResult SanPhamTheoDoiTuong(string MaDT, int? page)
+        //{
+        //    int pageNumber = page == null || page < 1 ? 1 : page.Value;
+        //    int pageSize = 6;
+        //    var lstSanpham = (from sp in db.SanPhams
+        //                      join lsp in db.LoaiSps on sp.MaLoaiSp equals lsp.MaLoaiSp
+        //                      join dt in db.DoiTuongMhs on lsp.MaDoiTuongMhs equals dt.MaDoiTuongMh  
+                              
+        //                      );
+        //    PagedList<SanPham> lst = new PagedList<SanPham>(lstSanpham, pageNumber, pageSize);
+        //    ViewBag.MaDT = MaDT;
+        //    return View(lst);
+        //}
         public const string CARTKEY = "cart";
 
         // Lấy cart từ Session (danh sách CartItem)
