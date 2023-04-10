@@ -17,9 +17,15 @@ public partial class SanPham
 
     public string? HinhAnhAvatar { get; set; }
 
-    public string MaLoaiSp { get; set; } = null!;
+    public string? MaLoaiSp { get; set; }
+
+    public string? MaDoiTuongMh { get; set; }
 
     public virtual ICollection<ChiTietSanPham> ChiTietSanPhams { get; } = new List<ChiTietSanPham>();
 
-    public virtual LoaiSp MaLoaiSpNavigation { get; set; } = null!;
+    public virtual ICollection<HinhAnhSp> HinhAnhSps { get; } = new List<HinhAnhSp>();
+
+    public virtual DoiTuongMh? MaDoiTuongMhNavigation { get; set; }
+
+    public virtual LoaiSp? MaLoaiSpNavigation { get; set; }
 }

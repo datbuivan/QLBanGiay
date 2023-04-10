@@ -1,0 +1,175 @@
+﻿@{
+    ViewData["Title"] = "DanhSachSanPham";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Nhom3_QLBanGiay.Models
+
+@using X.PagedList.Mvc.Core
+@model X.PagedList.IPagedList<SanPham>
+
+
+
+
+<div class="content-wrapper">
+    <div class="row w-100 m-0">
+        <div class="col-lg-12 stretch-card">
+            <div class="card mb-0">
+                <div class="card-body">
+                    <div class="row w-100 mt-3">
+                        <div class="col-md-6">
+                            <h4 class="card-title ml-4" style="font-size:24px;">Trang chủ / Danh sách sản phẩm</h4>
+                        </div>
+                        <div class="col-md-6 d-flex justify-content-end">
+                            <a class="btn btn-info mr-3" asp-action="ThemSanPham"><i class="ti-plus"></i></a>
+                            <form asp-action="XoaSanPham">
+                                @for (var i=0;i<Model.Count;i++)
+                                {
+                                    <input class="inputMaSM" type="hidden" asp-for="@Model[i].MaSanPham" disabled/>
+                                }
+                                <!-- Button trigger modal -->
+                                <button id="deleteSelected" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <i class="ti-trash"></i>
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Bạn có muốn xóa?</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                ...
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Thoát</button>
+                                                <button type="submit" class="btn btn-danger">Xóa</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    @if (TempData["Msg"] != null && TempData["Msg"].ToString() != "")
+                    {
+                        <div class="alert alert-danger row m-0 pl-5 pr-5 mt-5 w-100">@TempData["Msg"]</div>
+                    }
+                    <div class="table-responsive pt-3">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="position-relative">
+                                        <input class="form-check-input position-absolute" style="top:20%;left:90%" type="checkbox" id="checkAll" />
+                                    </th>
+                                    <th>@Html.DisplayNameFor(model=>model[0].TenSanPham)</th>
+                                    <th>@Html.DisplayNameFor(model=>model[0].ChatLieu)</th>
+                                    <th>@Html.DisplayNameFor(model=>model[0].GiaNhap)</th>
+                                    <th>@Html.DisplayNameFor(model=>model[0].GiaBan)</th>
+                                    <th>Sửa</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var sp in Model)
+                                {
+                                    <tr>
+                                        <td class="position-relative">
+                                            <input class="form-check-input position-absolute deleteItem" style="top:20%;left:90%" type="checkbox"/>
+                                            <input type="hidden" value="@sp.MaSanPham" class="inputMa" disabled/>
+                                        </td>
+                                        <td>@sp.TenSanPham</td>
+                                        <td>@sp.ChatLieu</td>
+                                        <td>@sp.GiaNhap</td>
+                                        <td>@sp.GiaBan</td>
+                                        <td>
+                                            <a asp-action="ThemCTSanPham" asp-route-masp="@sp.MaSanPham" class="badge badge-info">
+                                                <i class="ti-plus"></i>
+                                            </a>
+                                            <a asp-action="SuaSanPham" asp-route-masp="@sp.MaSanPham" class="badge badge-success">
+                                                <i class="ti-pencil-alt"></i>
+                                            </a>
+                                            <a asp-action="XoaCTSanPham" asp-route-masp="@sp.MaSanPham" class="badge badge-danger">
+                                                <i class="ti-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <div class="pagination ml-3 mt-5">
+                            @Html.PagedListPager(Model,page => Url.Action("DanhSachSanPham", new {page=page}),new X.PagedList.Web.Common.PagedListRenderOptions(){
+                            LiElementClasses=new List<String> {"page-item"},
+                            PageClasses = new List<String> {"page-link"}
+                            })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<script>
+    document.querySelector('.btn-deleteOk').addEventListener('click', function () {
+        location.reload();
+    });
+</script>
+*@
+<script>
+
+    const checkAll = document.querySelector('#checkAll');
+    const checkboxes = document.querySelectorAll('.deleteItem');
+    const inputs = document.querySelectorAll('.inputMa');
+    const otherInputs = document.querySelectorAll('.inputMaSM');
+
+
+    checkAll.addEventListener('change', () => {
+        if (checkAll.checked) {
+            checkboxes.forEach(item => {
+                item.checked = true;
+            });
+            otherInputs.forEach(otherInput => {
+                otherInput.disabled = false;
+            });
+        } else {
+            checkboxes.forEach(item => {
+                item.checked = false;
+            });
+            otherInputs.forEach(otherInput => {
+                otherInput.disabled = true;
+            });
+        }
+    });
+
+    // Lặp qua từng checkbox và thêm sự kiện "change"
+    checkboxes.forEach((checkbox, index) => {
+        checkbox.addEventListener('change', () => {
+            var valc = inputs[index].value;
+            if (checkbox.checked) {
+                // Nếu checkbox được check, set thuộc tính "disabled" của input bằng false
+                //inputs[index].disabled = false;
+
+                // Lặp qua từng otherInput và kiểm tra giá trị để set thuộc tính "disabled"
+                otherInputs.forEach((otherInput) => {
+                    if (otherInput.value === valc) {
+                        otherInput.disabled = false;
+                    }
+                });
+            } else {
+                // Nếu checkbox không được check, set thuộc tính "disabled" của input bằng true và giá trị của input bằng ''
+                //inputs[index].disabled = true;
+
+                otherInputs.forEach((otherInput) => {
+                    if (otherInput.value === valc) {
+                        otherInput.disabled = true;
+                    }
+                });
+            }
+        });
+    });
+
+</script>
+
+

@@ -1,0 +1,196 @@
+﻿@using Nhom3_QLBanGiay.Areas.Admin.ViewModels
+@model CTSPViewModel
+
+@{
+    ViewData["Title"] = "XoaCTSanPham";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+<div class="pt-3 w-100" style="min-height:100vh">
+    <div class="row w-100 m-0 mt-3">
+        <div class="col-md-6">
+            <h4 class="ml-4">Trang chủ / Thêm sản phẩm</h4>
+        </div>
+        <div class="col-md-6 d-flex justify-content-end">
+            <div>
+                <a asp-action="DanhSachSanPham" class="btn btn-info mr-5">Xem danh sách</a>
+            </div>
+        </div>
+    </div>
+    @if (!string.IsNullOrEmpty(ViewBag.Msg))
+    {
+        <div class="alert alert-danger row m-0 pl-5 pr-5 mt-5 w-100">@ViewBag.Msg</div>
+    }
+    <div class="row pl-5 pr-5 w-100 mt-4">
+        <div class="col-md-9">
+            <table class="table table-striped w-100">
+                <thead>
+                    <tr>
+                        <th class="position-relative">
+                            <input class="form-check-input position-absolute" style="top:20%;left:60%" type="checkbox" id="checkAll" />
+                        </th>
+                        <th>Tên sản phẩm</th>
+                        <th>Màu sắc</th>
+                        <th>Kích thước</th>
+                        <th>Số lượng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (var i = 0; i < ViewBag.CT.Count; i++)
+                    {
+                        <tr>
+                            <td class="position-relative">
+                                <input class="form-check-input position-absolute deleteItem" style="top:20%;left:60%" type="checkbox" />
+                                <input class="inputMaSP" type="hidden" value="@ViewBag.CT[i].MaSanPham" disabled />
+                                <input class="inputMaMS" type="hidden" value="@ViewBag.CT[i].MaMauSac" disabled />
+                                <input class="inputMaKT" type="hidden" value="@ViewBag.CT[i].MaKichThuoc" disabled />
+                            </td>
+                            <td>
+                                @ViewBag.SP.TenSanPham
+                            </td>
+                            <td>
+                                @for (var j = 0; j < ViewBag.MS.Count; j++)
+                                {
+                                    if (ViewBag.CT[i].MaMauSac == ViewBag.MS[j].MaMauSac)
+                                    {
+                                        @ViewBag.MS[j].TenMauSac
+                                    }
+                                }
+                            </td>
+                            <td>
+                                @for (var j = 0; j < ViewBag.KT.Count; j++)
+                                {
+                                    if (ViewBag.CT[i].MaKichThuoc == ViewBag.KT[j].MaKichThuoc)
+                                    {
+                                        @ViewBag.KT[j].TenKichThuoc
+                                    }
+                                }
+                            </td>
+                            <td>
+                                @ViewBag.CT[i].SoLuong
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-3">
+            <form asp-action="XoaCTSanPham">
+                <input type="hidden" asp-for="@Model.MaSanPham" value="@ViewBag.SP.MaSanPham" />
+                @for (var i = 0; i < ViewBag.CT.Count; i++)
+                {
+                    <input class="inputMaSPSM" type="hidden" asp-for="@Model.ChiTietSanPham[i].MaSanPham" value="@ViewBag.CT[i].MaSanPham" disabled />
+                    <input class="inputMaMSSM" type="hidden" asp-for="@Model.ChiTietSanPham[i].MaMauSac" value="@ViewBag.CT[i].MaMauSac" disabled />
+                    <input class="inputMaKTSM" type="hidden" asp-for="@Model.ChiTietSanPham[i].MaKichThuoc" value="@ViewBag.CT[i].MaKichThuoc" disabled />
+                }
+                <div class="form-group d-flex justify-content-center align-items-center">
+                    <button id="deleteSelected" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <i class="ti-trash"></i>
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Bạn có muốn xóa?</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    ...
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Thoát</button>
+                                    <button type="submit" class="btn btn-danger">Xóa</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    const checkAll = document.querySelector('#checkAll');
+    const checkboxes = document.querySelectorAll('.deleteItem');
+    const inputMaSPs = document.querySelectorAll('.inputMaSP');
+    const otherInputMaSPs = document.querySelectorAll('.inputMaSPSM');
+    const inputMaMSs = document.querySelectorAll('.inputMaMS');
+    const otherInputMaMSs = document.querySelectorAll('.inputMaMSSM');
+    const inputMaKTs = document.querySelectorAll('.inputMaKT');
+    const otherInputMaKTs = document.querySelectorAll('.inputMaKTSM');
+    checkAll.addEventListener('change', () => {
+        if (checkAll.checked) {
+            checkboxes.forEach(item => {
+                item.checked = true;
+            });
+            otherInputMaSPs.forEach(otherInput => {
+                otherInput.disabled = false;
+            });
+            otherInputMaMSs.forEach(otherInput => {
+                otherInput.disabled = false;
+            });
+            otherInputMaKTs.forEach(otherInput => {
+                otherInput.disabled = false;
+            });
+        } else {
+            checkboxes.forEach(item => {
+                item.checked = false;
+            });
+            otherInputMaSPs.forEach(otherInput => {
+                otherInput.disabled = true;
+            });
+            otherInputMaMSs.forEach(otherInput => {
+                otherInput.disabled = true;
+            });
+            otherInputMaKTs.forEach(otherInput => {
+                otherInput.disabled = true;
+            });
+        }
+    });
+
+    // Lặp qua từng checkbox và thêm sự kiện "change"
+    checkboxes.forEach((checkbox, index) => {
+        checkbox.addEventListener('change', () => {
+            var valc1 = inputMaSPs[index].value;
+            var valc2 = inputMaMSs[index].value;
+            var valc3 = inputMaKTs[index].value;
+            if (checkbox.checked) {
+                // Nếu checkbox được check, set thuộc tính "disabled" của input bằng false
+                //inputMaSPs[index].disabled = false;
+
+                // Lặp qua từng otherInput và kiểm tra giá trị để set thuộc tính "disabled"
+                for (let i = 0; i < otherInputMaSPs.length; i++) {
+                    let otherInput1 = otherInputMaSPs[i];
+                    let otherInput2 = otherInputMaMSs[i];
+                    let otherInput3 = otherInputMaKTs[i];
+                    if (otherInput1.value === valc1 && otherInput2.value === valc2 && otherInput3.value === valc3) {
+                        otherInput1.disabled = false;
+                        otherInput2.disabled = false;
+                        otherInput3.disabled = false;
+                    }
+                }
+            } else {
+                // Nếu checkbox không được check, set thuộc tính "disabled" của input bằng true và giá trị của input bằng ''
+                //inputMaSPs[index].disabled = true;
+
+                for (let i = 0; i < otherInputMaSPs.length; i++) {
+                    let otherInput1 = otherInputMaSPs[i];
+                    let otherInput2 = otherInputMaMSs[i];
+                    let otherInput3 = otherInputMaKTs[i];
+                    if (otherInput1.value === valc1 && otherInput2.value === valc2 && otherInput3.value === valc3) {
+                        otherInput1.disabled = true;
+                        otherInput2.disabled = true;
+                        otherInput3.disabled = true;
+                    }
+                }
+            }
+        });
+    });
+
+</script>

@@ -9,15 +9,15 @@ public partial class HoaDonNhap
 
     public DateOnly? NgayNhap { get; set; }
 
-    public string MaNhaCungCap { get; set; } = null!;
+    public string? MaNhaCungCap { get; set; }
 
-    public string MaNhanVien { get; set; } = null!;
+    public string? MaNhanVien { get; set; }
 
     public double? TongTien { get; set; }
 
     public virtual ICollection<ChiTietHoaDonNhap> ChiTietHoaDonNhaps { get; } = new List<ChiTietHoaDonNhap>();
 
-    public virtual NhaCungCap MaNhaCungCapNavigation { get; set; } = null!;
+    public virtual NhaCungCap? MaNhaCungCapNavigation { get; set; }
 
-    public virtual NhanVien MaNhanVienNavigation { get; set; } = null!;
+    public virtual NhanVien? MaNhanVienNavigation { get; set; }
 }

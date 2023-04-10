@@ -1,0 +1,161 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Nhom3_QLBanGiay.Areas.Admin.ViewModels
+@model SanPhamViewModel
+
+@{
+    ViewData["Title"] = "SuaSanPham";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="pt-3 w-100" style="min-height:100vh">
+    <div class="row w-100 m-0 mt-3">
+        <div class="col-md-6">
+            <h4 class="ml-4">Trang chủ / Sửa sản phẩm</h4>
+        </div>
+        <div class="col-md-6 d-flex justify-content-end">
+            <div>
+                <a asp-action="DanhSachSanPham" class="btn btn-info mr-5">Xem danh sách</a>
+            </div>
+        </div>
+    </div>
+    <form asp-action="SuaSanPham">
+        <div class="row pt-5 w-100 pl-3 pr-3">
+            <div class="col-md-4">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="@Model.SanPham.MaSanPham" />
+                <div class="form-group">
+                    <label asp-for="@Model.SanPham.TenSanPham" class="control-label"></label>
+                    <input asp-for="@Model.SanPham.TenSanPham" class="form-control" placeholder="Enter your name" required />
+                    <div class="invalid-feedback">
+                        Please enter the product name.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.SanPham.ChatLieu" class="control-label"></label>
+                    <input asp-for="@Model.SanPham.ChatLieu" class="form-control" placeholder="Enter your material" required />
+                    <div class="invalid-feedback">
+                        Please enter the product material.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.SanPham.GiaNhap" class="control-label"></label>
+                    <input asp-for="@Model.SanPham.GiaNhap" class="form-control" type="number" step="0.1"
+                            placeholder="Enter your import price" required />
+                    <div class="invalid-feedback">
+                        Please enter the product import price.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.SanPham.GiaBan" class="control-label"></label>
+                    <input asp-for="@Model.SanPham.GiaBan" class="form-control" type="number" step="0.1"
+                            placeholder="Enter your selling price" required />
+                    <span asp-validation-for="@Model.SanPham.GiaBan" class="text-danger"></span>
+                    <div class="invalid-feedback">
+                        Please enter the product selling price.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.SanPham.HinhAnhAvatar" class="control-label"></label>
+                    <input asp-for="@Model.SanPham.HinhAnhAvatar" class="form-control" placeholder="Enter your avatar" required />
+                    <div class="invalid-feedback">
+                        Please enter the product avatar.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.SanPham.MaLoaiSp" class="control-label"></label>
+                    <select asp-for="@Model.SanPham.MaLoaiSp" class="form-control" required>
+                        <option value="" disabled selected>--Choose--</option>
+                        @foreach (var item in ViewBag.MaLoaiSp)
+                        {
+                            if(item.MaLoaiSp==Model.SanPham.MaLoaiSp){
+                                <option selected value="@item.MaLoaiSp">@item.TenLoaiSp</option>
+                            }
+                            else{<option value="@item.MaLoaiSp">@item.TenLoaiSp</option>}
+                        }
+                    </select>
+                    <div class="invalid-feedback">
+                        Please choose the product type.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.SanPham.MaDoiTuongMh" class="control-label"></label>
+                    <select asp-for="@Model.SanPham.MaDoiTuongMh" class="form-control" required>
+                        <option value="" disabled selected>--Choose--</option>
+                        @foreach (var item in ViewBag.MaDoiTuongMh)
+                        {
+                            if (item.MaDoiTuongMh == Model.SanPham.MaDoiTuongMh)
+                            {
+                                <option selected value="@item.MaDoiTuongMh">@item.TenDoiTuongMh</option>
+                            }
+                            else{<option value="@item.MaDoiTuongMh">@item.TenDoiTuongMh</option>}
+                        }
+                    </select>
+                    <div class="invalid-feedback">
+                        Please choose the product type.
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="table-responsive pt-3">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="w-40">Màu sắc</th>
+                                <th class="w-40">Kích thước</th>
+                                <th class="w-20">Số lượng</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for(var i=0;i<Model.ChiTietSanPham.Count;i++)
+                            {
+                                <tr>
+                                    <td>
+                                        <input type="hidden" asp-for="@Model.ChiTietSanPham[i].MaSanPham" class="inputMaSanPham">
+                                        <div class="form-group pl-3 pr-3">
+                                            <select asp-for="@Model.ChiTietSanPham[i].MaMauSac" class="form-control color-result">
+                                                @for (var j = 0; j < ViewBag.MS.Count; j++)
+                                                {
+                                                    if (ViewBag.MS[j].MaMauSac == @Model.ChiTietSanPham[i].MaMauSac)
+                                                    {
+                                                        <option value="@ViewBag.MS[j].MaMauSac">@ViewBag.MS[j].TenMauSac</option>
+                                                    }
+                                                }
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group pl-3 pr-3">
+                                        <select asp-for="@Model.ChiTietSanPham[i].MaKichThuoc" class="form-control size-result">
+                                            @for (var j = 0; j < ViewBag.KT.Count; j++)
+                                            {
+                                                if (ViewBag.KT[j].MaKichThuoc == @Model.ChiTietSanPham[i].MaKichThuoc)
+                                                {
+                                                    <option value="@ViewBag.KT[j].MaKichThuoc">@ViewBag.KT[j].TenKichThuoc</option>
+                                                }
+                                            }
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group pl-3 pr-3">
+                                            <input class="form-control qty-result" asp-for="@Model.ChiTietSanPham[i].SoLuong" type="number" min="0" required />
+                                            <div class="invalid-feedback">
+                                                Please choose the product quantity.
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row m-0 mt-5" style="width:100%">
+            <div class="form-group d-flex justify-content-center align-items-center">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </div>
+    </form>
+</div>
+

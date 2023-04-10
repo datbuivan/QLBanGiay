@@ -10,6 +10,4 @@ public partial class LoaiSp
     public string? TenLoaiSp { get; set; }
 
     public virtual ICollection<SanPham> SanPhams { get; } = new List<SanPham>();
-
-    public virtual ICollection<DoiTuongMh> MaDoiTuongMhs { get; } = new List<DoiTuongMh>();
 }

@@ -10,4 +10,6 @@ public partial class HinhAnhSp
     public string MaSanPham { get; set; } = null!;
 
     public int? ViTri { get; set; }
+
+    public virtual SanPham MaSanPhamNavigation { get; set; } = null!;
 }

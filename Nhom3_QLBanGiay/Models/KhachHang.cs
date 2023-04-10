@@ -13,9 +13,9 @@ public partial class KhachHang
 
     public string? SoDienThoai { get; set; }
 
-    public string UserName { get; set; } = null!;
+    public string? UserName { get; set; }
 
     public virtual ICollection<HoaDonBan> HoaDonBans { get; } = new List<HoaDonBan>();
 
-    public virtual User UserNameNavigation { get; set; } = null!;
+    public virtual User? UserNameNavigation { get; set; }
 }
