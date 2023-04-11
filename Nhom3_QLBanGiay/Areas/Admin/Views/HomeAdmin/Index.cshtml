@@ -3,6 +3,7 @@
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <div class="content">
     <!-- Animated -->
@@ -18,8 +19,8 @@
                             </div>
                             <div class="stat-content">
                                 <div class="text-left dib">
-                                    <div class="stat-text">$<span class="count">23569</span></div>
-                                    <div class="stat-heading">Revenue</div>
+                                    <div class="stat-text"><span class="count">@ViewBag.priceAll</span>VND</div>
+                                    <div class="stat-heading">Tong doanh thu</div>
                                 </div>
                             </div>
                         </div>
@@ -36,8 +37,8 @@
                             </div>
                             <div class="stat-content">
                                 <div class="text-left dib">
-                                    <div class="stat-text"><span class="count">3435</span></div>
-                                    <div class="stat-heading">Sales</div>
+                                    <div class="stat-text"><span class="count">@ViewBag.countHDB</span></div>
+                                    <div class="stat-heading">Hoa don ban</div>
                                 </div>
                             </div>
                         </div>
@@ -54,8 +55,8 @@
                             </div>
                             <div class="stat-content">
                                 <div class="text-left dib">
-                                    <div class="stat-text"><span class="count">349</span></div>
-                                    <div class="stat-heading">Templates</div>
+                                    <div class="stat-text"><span class="count">@ViewBag.countHDBToDay</span></div>
+                                    <div class="stat-heading">Hoa don ban trong ngay</div>
                                 </div>
                             </div>
                         </div>
@@ -72,8 +73,8 @@
                             </div>
                             <div class="stat-content">
                                 <div class="text-left dib">
-                                    <div class="stat-text"><span class="count">2986</span></div>
-                                    <div class="stat-heading">Clients</div>
+                                    <div class="stat-text"><span class="count">@ViewBag.countUser</span></div>
+                                    <div class="stat-heading">Custommer</div>
                                 </div>
                             </div>
                         </div>
