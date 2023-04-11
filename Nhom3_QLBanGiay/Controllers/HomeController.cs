@@ -18,12 +18,17 @@ namespace Nhom3_QLBanGiay.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index(int? page)
+        public IActionResult Index(int? page ,string search)
         {
             int pageNumber = page == null || page < 1 ? 1 : page.Value;
             int pageSize = 8;
-            var lstSanpham = db.SanPhams.AsNoTracking().OrderBy(x => x.MaSanPham);
+            var lstSanpham = from sp in db.SanPhams select sp;
+            if (!String.IsNullOrEmpty(search))
+            {
+                lstSanpham = lstSanpham.Where(x => x.TenSanPham.Contains(search));
+            }
             PagedList<SanPham> lst = new PagedList<SanPham>(lstSanpham, pageNumber, pageSize);
+            ViewBag.page = page;
             return View(lst);
 
         }
@@ -47,12 +52,17 @@ namespace Nhom3_QLBanGiay.Controllers
                 return View(sanpham);
             }
         }
-        public IActionResult Shop(int? page)
+        public IActionResult Shop(int? page,string search)
         {
             int pageNumber = page == null || page < 1 ? 1 : page.Value;
             int pageSize = 6;
-            var lstSanpham = db.SanPhams.AsNoTracking().OrderBy(x => x.MaSanPham);
+            var lstSanpham = from sp in db.SanPhams select sp;
+            if (!String.IsNullOrEmpty(search))
+            {
+                lstSanpham = lstSanpham.Where(x => x.TenSanPham.Contains(search));
+            }
             PagedList<SanPham> lst = new PagedList<SanPham>(lstSanpham, pageNumber, pageSize);
+            ViewBag.page = page;
             return View(lst);
         }
         public IActionResult SanPhamTheoLoai(string MaLoai, int? page)
