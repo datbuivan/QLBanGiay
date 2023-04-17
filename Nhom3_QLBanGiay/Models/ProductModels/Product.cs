@@ -8,6 +8,8 @@
         public double? GiaBan { get; set; }
         public string? HinhAnhAvatar { get; set; }
 
+        public string? MaDoiTuongMh { get; set; }
+
         public string MaLoaiSp { get; set; } = null!;
     }
 }

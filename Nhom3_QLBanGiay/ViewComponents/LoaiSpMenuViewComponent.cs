@@ -14,7 +14,7 @@ namespace Lab2.ViewComponents
 
         public IViewComponentResult Invoke()
         {
-            var loaisps = _loaiSPRepository.GetAllLoaiSp().OrderBy(x => x.TenLoaiSp);
+            var loaisps = _loaiSPRepository.GetAllLoaiSp();
             return View(loaisps);
         }
     }

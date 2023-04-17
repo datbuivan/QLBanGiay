@@ -51,12 +51,10 @@
                             <li class="nav-item">
                             @foreach (var image in ViewBag.anhSanPham)
                             {
-                                
                                     <a class="nav-link" data-toggle="tab" href="#tabs-1" role="tab">
                                         <div class="product__thumb__pic set-bg" data-setbg="@Url.Content("../Products/Image/"+image.TenFileAnh)" style="background-image: url(&quot;../Shoes/img/shop-details/thumb-1.png&quot;);">
                                         </div>
                                     </a>
-                                
                             }
                             </li>
                         </ul>
@@ -80,14 +78,27 @@
                         <div class="product__details__text">
                             <h4>@Model.TenSanPham</h4>
                             <div class="rating">
-                                <i class="fa fa-star"></i>
+                                @*<i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star"></i>
                                 <i class="fa fa-star-o"></i>
-                                <span> - 5 Reviews</span>
+                                <span> - 5 Reviews</span>*@
+                                <p>Vote: @Model.Vote</p>
+                                <p>Số Lượt Vote: @Model.SoLuotVot</p>
                             </div>
                             <h3>@Model.GiaBan</h3>
+                            <form asp-action="Vote">
+                                <input type="hidden" asp-for="@Model.MaSanPham" value="@Model.MaSanPham"/>
+                                <select asp-for="@Model.Vote">
+                                    <option value="1">1 sao</option>
+                                    <option value="2">2 sao</option>
+                                    <option value="3">3 sao</option>
+                                    <option value="4">4 sao</option>
+                                    <option value="5">5 sao</option>
+                                </select>
+                                <button type="submit">Đánh giá</button>
+                            </form>
                             <p>
                                 Coat with quilted lining and an adjustable hood. Featuring long sleeves with adjustable
                                 cuff tabs, adjustable asymmetric hem with elastic side tabs and a front zip fastening

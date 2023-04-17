@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "LyJZCusZhSAFpH4NyPCLr6WBjcCjzl89ukwliggsumM=",
+  "Hash": "PASsVKdlmPqvCoQzACKWHh7s0utugrQJw0GtFo9RzEs=",
   "Source": "Nhom3_QLBanGiay",
   "BasePath": "_content/Nhom3_QLBanGiay",
   "Mode": "Default",
@@ -5047,6 +5047,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Shoes\\img\\clients\\client-8.png"
+    },
+    {
+      "Identity": "C:\\Users\\Admin\\Documents\\QLBanGiay\\Nhom3_QLBanGiay\\wwwroot\\Shoes\\img\\face1.jpg",
+      "SourceId": "Nhom3_QLBanGiay",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Admin\\Documents\\QLBanGiay\\Nhom3_QLBanGiay\\wwwroot\\",
+      "BasePath": "_content/Nhom3_QLBanGiay",
+      "RelativePath": "Shoes/img/face1.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Shoes\\img\\face1.jpg"
     },
     {
       "Identity": "C:\\Users\\Admin\\Documents\\QLBanGiay\\Nhom3_QLBanGiay\\wwwroot\\Shoes\\img\\footer-logo.png",

@@ -21,9 +21,11 @@ public partial class SanPham
 
     public string? MaDoiTuongMh { get; set; }
 
-    public virtual ICollection<ChiTietSanPham> ChiTietSanPhams { get; } = new List<ChiTietSanPham>();
+    public double Vote { get; set; }
 
-    public virtual ICollection<HinhAnhSp> HinhAnhSps { get; } = new List<HinhAnhSp>();
+    public int SoLuotVot { get; set; }
+
+    public virtual ICollection<ChiTietSanPham> ChiTietSanPhams { get; } = new List<ChiTietSanPham>();
 
     public virtual DoiTuongMh? MaDoiTuongMhNavigation { get; set; }
 

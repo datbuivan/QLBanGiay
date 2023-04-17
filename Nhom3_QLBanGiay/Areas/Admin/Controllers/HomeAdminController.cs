@@ -10,6 +10,7 @@ using System.Drawing.Printing;
 using System.Text.RegularExpressions;
 using X.PagedList;
 using EntityState = Microsoft.EntityFrameworkCore.EntityState;
+using Bai2.Models.Authentication;
 
 namespace Nhom3_QLBanGiay.Areas.Admin.Controllers
 {
@@ -22,20 +23,21 @@ namespace Nhom3_QLBanGiay.Areas.Admin.Controllers
 
         [Route("")]
         [Route("Index")]
+        [Authentication]
         public IActionResult Index()
         {
-            ViewBag.priceAll =(from hdb in db.HoaDonBans
-                               join cthdb in db.ChiTietHoaDonBans on hdb.MaHoaDonBan equals cthdb.MaHoaDonBan
-                               select cthdb.DonGiaBan).Sum();
+            ViewBag.priceAll = (from hdb in db.HoaDonBans
+                                join cthdb in db.ChiTietHoaDonBans on hdb.MaHoaDonBan equals cthdb.MaHoaDonBan
+                                select cthdb.DonGiaBan).Sum();
 
             ViewBag.countHDB = (from hdb in db.HoaDonBans
                                 select hdb).Count();
 
             DateOnly currentDate = DateOnly.FromDateTime(DateTime.Now);
 
-            ViewBag.countHDBToDay =(from hdb in db.HoaDonBans
-                                    where hdb.NgayBan == currentDate
-                                    select hdb).Count();
+            ViewBag.countHDBToDay = (from hdb in db.HoaDonBans
+                                     where hdb.NgayBan == currentDate
+                                     select hdb).Count();
 
             ViewBag.countUser = (from u in db.Users
                                  where u.Role == 1
@@ -44,6 +46,7 @@ namespace Nhom3_QLBanGiay.Areas.Admin.Controllers
         }
 
         [Route("danhsachsanpham")]
+        [Authentication]
         public IActionResult DanhSachSanPham(int? page, String? SearchText)
         {
             int pageNumber = page == null || page < 0 ? 1 : page.Value;
@@ -76,6 +79,7 @@ namespace Nhom3_QLBanGiay.Areas.Admin.Controllers
         }
 
         [Route("themsanpham")]
+        [Authentication]
         public IActionResult ThemSanPham()
         {
             //ViewBag.MaLoaiSp = new SelectList(db.LoaiSps, "MaLoaiSp", "TenLoaiSp");
@@ -96,6 +100,7 @@ namespace Nhom3_QLBanGiay.Areas.Admin.Controllers
         [Route("themsanpham")]
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authentication]
         public IActionResult ThemSanPham(SanPhamViewModel sp)
         {
             //if (ModelState.IsValid)
@@ -107,7 +112,6 @@ namespace Nhom3_QLBanGiay.Areas.Admin.Controllers
             }
             else
             {
-
                 db.SanPhams.Add(sp.SanPham);
                 int c = db.SaveChanges();
                 if (c > 0)
@@ -116,10 +120,6 @@ namespace Nhom3_QLBanGiay.Areas.Admin.Controllers
                     {
                         foreach (var chiTietSanPham in sp.ChiTietSanPham)
                         {
-                            if (chiTietSanPham == null)
-                            {
-                                sp.ChiTietSanPham.Remove(chiTietSanPham);
-                            }
                             chiTietSanPham.MaSanPham = sp.SanPham.MaSanPham;
                         }
                         db.AddRange(sp.ChiTietSanPham);
@@ -131,7 +131,7 @@ namespace Nhom3_QLBanGiay.Areas.Admin.Controllers
                     }
                     else
                     {
-                        db.SanPhams.Remove(sp.SanPham);
+                        db.SanPhams.Remove(db.SanPhams.SingleOrDefault(x => x.MaSanPham == sp.SanPham.MaSanPham));
                         db.SaveChanges();
                         ViewBag.Msg = "Cần nhập đủ sản phẩm và chi tiết sản phẩm";
                     }
@@ -160,15 +160,21 @@ namespace Nhom3_QLBanGiay.Areas.Admin.Controllers
             int c1 = db.MauSacs.Count();
             int c2 = db.KichThuocs.Count();
             ViewBag.Count = c1 * c2;
-            return View(sp);
+            SanPhamViewModel spvmd = new SanPhamViewModel
+            {
+                SanPham = sp.SanPham,
+                //ChiTietSanPham = new List<ChiTietSanPham>()
+            };
+            return View(spvmd);
         }
 
         [Route("themctsanpham")]
+        [Authentication]
         public IActionResult ThemCTSanPham(String masp)
         {
             List<ChiTietSanPham> lstct = db.ChiTietSanPhams.Where(x => x.MaSanPham == masp).ToList();
             ViewBag.CT = lstct;
-            SanPham sp = db.SanPhams.SingleOrDefault(x=>x.MaSanPham==masp);
+            SanPham sp = db.SanPhams.SingleOrDefault(x => x.MaSanPham == masp);
             ViewBag.SP = sp;
             List<MauSac> lstms = db.MauSacs.ToList();
             ViewBag.MS = lstms;
@@ -184,6 +190,7 @@ namespace Nhom3_QLBanGiay.Areas.Admin.Controllers
         [Route("themctsanpham")]
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authentication]
         public IActionResult ThemCTSanPham(CTSPViewModel ctsp)
         {
             if (ctsp.ChiTietSanPham == null || !ctsp.ChiTietSanPham.Any())
@@ -216,6 +223,7 @@ namespace Nhom3_QLBanGiay.Areas.Admin.Controllers
 
         [Route("suasanpham")]
         [HttpGet]
+        [Authentication]
         public IActionResult SuaSanPham(String masp)
         {
             List<LoaiSp> lstlsp = db.LoaiSps.ToList();
@@ -239,13 +247,14 @@ namespace Nhom3_QLBanGiay.Areas.Admin.Controllers
         [Route("suasanpham")]
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authentication]
         public IActionResult SuaSanPham(SanPhamViewModel spc)
         {
             if (spc != null && spc.SanPham != null)
             {
                 var sanpham = spc.SanPham;
                 db.Entry(sanpham).State = EntityState.Modified;
-                int v=db.SaveChanges();
+                int v = db.SaveChanges();
                 if (spc.ChiTietSanPham != null && spc.ChiTietSanPham.Any())
                 {
                     foreach (var item in spc.ChiTietSanPham)
@@ -283,6 +292,7 @@ namespace Nhom3_QLBanGiay.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authentication]
         public IActionResult XoaSanPham(List<SanPham> sp)
         {
             TempData["Msg"] = "";
@@ -292,37 +302,60 @@ namespace Nhom3_QLBanGiay.Areas.Admin.Controllers
                 return RedirectToAction("DanhSachSanPham");
             }
 
-            foreach (var s in sp)
+            else
             {
-                SanPham spt = db.SanPhams.SingleOrDefault(x=>x.MaSanPham==s.MaSanPham);
-
-                if (spt != null)
+                int c = 0;
+                foreach (var s in sp)
                 {
-                    // Xóa tất cả các chi tiết sản phẩm liên quan đến sản phẩm
-                    List<ChiTietSanPham> ctsps = db.ChiTietSanPhams.Where(ctsp => ctsp.MaSanPham == s.MaSanPham).ToList();
-                    if (ctsps != null && ctsps.Count > 0)
+                    bool exit1 = db.ChiTietHoaDonBans.Any(x => x.MaSanPham == s.MaSanPham);
+                    bool exit2 = db.ChiTietHoaDonNhaps.Any(x => x.MaSanPham == s.MaSanPham);
+                    if (exit1 || exit2)
                     {
-                        db.ChiTietSanPhams.RemoveRange(ctsps);
-                        db.SaveChanges();
 
                     }
-
-                    db.SanPhams.Remove(spt);
-                    int c = db.SaveChanges();
-
-                    if (c > 0)
+                    else
                     {
-                        TempData["Msg"] = "Xóa thành công";
-                        return RedirectToAction("DanhSachSanPham");
+                        SanPham spt = db.SanPhams.SingleOrDefault(x => x.MaSanPham == s.MaSanPham);
+
+                        if (spt != null)
+                        {
+                            List<HinhAnhSp> hasp = db.HinhAnhSps.Where(ctsp => ctsp.MaSanPham == s.MaSanPham).ToList();
+                            if (hasp != null && hasp.Any())
+                            {
+                                db.HinhAnhSps.RemoveRange(hasp);
+                                db.SaveChanges();
+                            }
+
+                            // Xóa tất cả các chi tiết sản phẩm liên quan đến sản phẩm
+                            List<ChiTietSanPham> ctsps = db.ChiTietSanPhams.Where(ctsp => ctsp.MaSanPham == s.MaSanPham).ToList();
+                            if (ctsps != null && ctsps.Any())
+                            {
+                                db.ChiTietSanPhams.RemoveRange(ctsps);
+                                db.SaveChanges();
+                            }
+
+                            db.SanPhams.Remove(spt);
+                            db.SaveChanges();
+                            c++;
+                        }
                     }
                 }
+                if (c == sp.Count)
+                {
+                    TempData["Msg"] = "Xóa thành công";
+
+                }
+                else
+                {
+                    TempData["Msg"] = "Có sản phẩm đã tồn tại hóa đơn";
+                }
+                return RedirectToAction("DanhSachSanPham");
             }
-            TempData["Msg"] = "Không thể xóa";
-            return RedirectToAction("DanhSachSanPham");
         }
 
         [Route("xoactsanpham")]
         [HttpGet]
+        [Authentication]
         public IActionResult XoaCTSanPham(String masp)
         {
             SanPham sp = db.SanPhams.SingleOrDefault(x => x.MaSanPham == masp);
@@ -339,6 +372,7 @@ namespace Nhom3_QLBanGiay.Areas.Admin.Controllers
         [Route("xoactsanpham")]
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authentication]
         public IActionResult XoaCTSanPham(CTSPViewModel ctsp)
         {
             if (ctsp.ChiTietSanPham == null || !ctsp.ChiTietSanPham.Any())
@@ -368,8 +402,10 @@ namespace Nhom3_QLBanGiay.Areas.Admin.Controllers
             ViewBag.KT = lstkt;
             List<ChiTietSanPham> lstct = db.ChiTietSanPhams.Where(x => x.MaSanPham == ctsp.MaSanPham).ToList();
             ViewBag.CT = lstct;
-            return View(ctsp);
+            return View();
         }
+
+
         public static string Convert(string input)
         {
             var result = Regex.Replace(input, "[àáảãạăắằẳẵặâầấẩẫậ]", "a");

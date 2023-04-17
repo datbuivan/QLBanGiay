@@ -31,26 +31,6 @@
     </div>
 </div>
 <header class="header">
-    <div class="header__top">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-7">
-                    <div class="header__top__left">
-                        <p>Free shipping, 30-day return or refund guarantee.</p>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-5">
-                    <div class="header__top__right">
-                        <div class="header__top__links">
-                            <a asp-controller="Access" asp-action="Logout">Log out</a>
-                        </div>
-                        <div class="header__top__hover">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-3">
@@ -73,7 +53,15 @@
                     <a href="#" class="search-switch"><img src="../Shoes/img/icon/search.png" alt=""></a>
                     <a href="#"><img src="../Shoes/img/icon/heart.png" alt=""></a>
                     <a href="#"><img src="../Shoes/img/icon/cart.png" alt=""> <span>0</span></a>
-                    <div class="price">$0.00</div>
+                   @* <div class="price">$0.00</div>*@
+                    <div class="header__top__hover">
+                        <img style=" width: 30px;height: 30px; border-radius: 50%;" src="../Shoes/img/face1.jpg" />
+                        <ul class="user-area dropdown float-left" style="width:100px; border-radius:4px">
+                            <li style="text-align:left"><a asp-controller="Access" asp-action="Logout" style="color: #555">My Profile</a></li>
+                            <li style="text-align:left"><a asp-controller="Access" asp-action="Logout" style="color: #555">Settings</a></li>
+                            <li style="text-align:left"><a asp-controller="Access" asp-action="Logout" style="color: #555">Log out</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

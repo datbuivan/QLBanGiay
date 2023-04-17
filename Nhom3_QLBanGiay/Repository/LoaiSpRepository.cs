@@ -19,9 +19,13 @@ namespace Nhom3_QLBanGiay.Repository
             throw new NotImplementedException();
         }
 
-        public IEnumerable<LoaiSp> GetAllLoaiSp()
+        public DoiTuong GetAllLoaiSp()
         {
-            return _context.LoaiSps;
+            return new DoiTuong
+            {
+                LoaiSp = _context.LoaiSps.ToList(),
+                DoiTuongMh = _context.DoiTuongMhs.ToList()
+            };
         }
 
         public LoaiSp GetLoaiSp(string MaLoai)

@@ -1,24 +1,78 @@
 ﻿@using X.PagedList.Mvc.Core;
-@model IEnumerable<LoaiSp>
-<div class="card-heading">
-    <a data-toggle="collapse" data-target="#collapseOne">Loại Sản Phẩm</a>
+@using Nhom3_QLBanGiay.Models;
+@model DoiTuong
+
+<div class="card">
+    <div>
+        @{
+            var getUrlAll = "https://localhost:7251/api/productsapi/";
+            <a style="cursor:pointer;font-weight:bold;font-size:16px" onclick="setAll(); showProductsByCategory('@getUrlAll')">TẤT CẢ SẢN PHẨM</a>
+        }
+    </div>
 </div>
-<div id="collapseOne" class="collapse show" data-parent="#accordionExample">
-    <div class="card-body">
-        <div class="shop__sidebar__categories">
-            <ul class="nice-scroll" tabindex="1" style="overflow-y: hidden; outline: none;">
-                @foreach(var loaisp in Model)
-                {
-                    @*<li><a asp-action="SanPhamTheoLoai" asp-controller="Home" asp-route-maloai="@loaisp.MaLoaiSp">@loaisp.TenLoaiSp</a></li>*@
-                    var getUrl = "https://localhost:7251/api/productsapi/" + loaisp.MaLoaiSp;
-                    <li><a style="cursor:pointer" onclick="showProductsByCategory('@getUrl')">@loaisp.TenLoaiSp</a></li>
-                }              
-            </ul>
+<div class="card">
+    <div class="card-heading">
+        <a data-toggle="collapse" data-target="#collapseOne">Loại Sản Phẩm</a>
+    </div>
+    <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
+        <div class="card-body">
+            <div class="shop__sidebar__categories">
+                <ul class="nice-scroll" tabindex="1" style="overflow-y: hidden; outline: none;">
+                    @for (var i = 0; i < Model.LoaiSp.Count; i++)
+                    {
+                        @*<li><a asp-action="SanPhamTheoLoai" asp-controller="Home" asp-route-maloai="@loaisp.MaLoaiSp">@loaisp.TenLoaiSp</a></li>*@
+                        var getUrl = "https://localhost:7251/api/productsapi?maLoaiSp=" + Model.LoaiSp[i].MaLoaiSp;
+                        <li><a style="cursor:pointer" onclick="setIPLoaiSp('@Model.LoaiSp[i].MaLoaiSp');showProductsByCategory('@getUrl')">@Model.LoaiSp[i].TenLoaiSp</a></li>
+                    }
+                </ul>
+            </div>
         </div>
     </div>
 </div>
+<div class="card">
+    <div class="card-heading">
+        <a data-toggle="collapse" data-target="#collapseTwo">Loại đối tượng</a>
+    </div>
+    <div id="collapseTwo" class="collapse show" data-parent="#accordionExample">
+        <div class="card-body">
+            <div class="shop__sidebar__brand">
+                <ul>
+                    @for (var i = 0; i < Model.DoiTuongMh.Count; i++)
+                    {
+                        @*<li><a asp-action="SanPhamTheoLoai" asp-controller="Home" asp-route-maloai="@loaisp.MaLoaiSp">@loaisp.TenLoaiSp</a></li>*@
+                        var getUrl = "https://localhost:7251/api/productsapi?maDTMh=" + Model.DoiTuongMh[i].MaDoiTuongMh;
+                        <li><a style="cursor:pointer" onclick="setIPDTMh('@Model.DoiTuongMh[i].MaDoiTuongMh');showProductsByCategory('@getUrl')">@Model.DoiTuongMh[i].TenDoiTuongMh</a></li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="IPLoaiSp" />
+<input type="hidden" id="IPDTMh" />
 <script>
+    function setAll(){
+        document.getElementById("IPLoaiSp").value ="";
+        document.getElementById("IPDTMh").value ="";
+    }
+    function setIPLoaiSp(maloai) {
+        document.getElementById("IPLoaiSp").value = maloai;
+        console.log(document.getElementById("IPLoaiSp").value);
+    }
+    function setIPDTMh(madt) {
+        document.getElementById("IPDTMh").value = madt;
+        console.log(document.getElementById("IPDTMh").value);
+    }
+
     function showProductsByCategory(getUrl){
+        let valLoai = document.getElementById("IPLoaiSp").value.trim();
+        let valDT = document.getElementById("IPDTMh").value.trim();
+
+        if (valLoai === "" || valDT === "") {
+            
+        } else{
+            getUrl = `https://localhost:7251/api/productsapi?maLoaiSp=${valLoai}&maDTMh=${valDT}`;
+        }
         var str='';
         $.ajax({
             type:'GET',

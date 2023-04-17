@@ -1,4 +1,5 @@
-﻿<header id="header" class="header">
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<header id="header" class="header">
     <div class="top-left">
         <div class="navbar-header">
             <a class="navbar-brand" href="./"><img src="../../Admin/images/logo.png" alt="Logo"></a>
@@ -94,7 +95,7 @@
 
                     <a class="nav-link" href="#"><i class="fa fa -cog"></i>Settings</a>
 
-                    <a class="nav-link" href="#"><i class="fa fa-power -off"></i>Logout</a>
+                    <a class="nav-link" asp-controller="Access" asp-action="Logout"><i class="fa fa-power -off"></i>Logout</a>
                 </div>
             </div>
 

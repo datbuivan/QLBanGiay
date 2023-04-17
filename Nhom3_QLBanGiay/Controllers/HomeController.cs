@@ -1,10 +1,12 @@
 ﻿using Azure;
+using Bai2.Models.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Nhom3_QLBanGiay.Models;
 using System.Data.Entity;
 using System.Diagnostics;
 using X.PagedList;
+using EntityState = Microsoft.EntityFrameworkCore.EntityState;
 
 namespace Nhom3_QLBanGiay.Controllers
 {
@@ -18,6 +20,7 @@ namespace Nhom3_QLBanGiay.Controllers
             _logger = logger;
         }
 
+    
         public IActionResult Index(int? page ,string search)
         {
             int pageNumber = page == null || page < 1 ? 1 : page.Value;
@@ -28,10 +31,11 @@ namespace Nhom3_QLBanGiay.Controllers
                 lstSanpham = lstSanpham.Where(x => x.TenSanPham.Contains(search));
             }
             PagedList<SanPham> lst = new PagedList<SanPham>(lstSanpham, pageNumber, pageSize);
-            ViewBag.page = page;
+            ViewBag.page = lst.PageCount;
             return View(lst);
 
         }
+   
         public IActionResult ChiTietSanPham(String maSp)
         {
             var anhSanPham = db.HinhAnhSps.Where(x => x.MaSanPham == maSp).ToList();
@@ -52,6 +56,7 @@ namespace Nhom3_QLBanGiay.Controllers
                 return View(sanpham);
             }
         }
+ 
         public IActionResult Shop(int? page,string search)
         {
             int pageNumber = page == null || page < 1 ? 1 : page.Value;
@@ -62,9 +67,10 @@ namespace Nhom3_QLBanGiay.Controllers
                 lstSanpham = lstSanpham.Where(x => x.TenSanPham.Contains(search));
             }
             PagedList<SanPham> lst = new PagedList<SanPham>(lstSanpham, pageNumber, pageSize);
-            ViewBag.page = page;
+            ViewBag.page = lst.PageCount;
             return View(lst);
         }
+        [Authentication]
         public IActionResult SanPhamTheoLoai(string MaLoai, int? page)
         {
             int pageNumber = page == null || page < 1 ? 1 : page.Value;
@@ -105,6 +111,7 @@ namespace Nhom3_QLBanGiay.Controllers
         }
         /// Thêm sản phẩm vào cart
 
+        [Authentication]
         public IActionResult AddToCart(string maSanPham)
         {
 
@@ -135,6 +142,7 @@ namespace Nhom3_QLBanGiay.Controllers
         }
         /// xóa item trong cart
 
+        [Authentication]
         public IActionResult RemoveCart(string maSanPham)
         {
             var cart = GetCartItems();
@@ -151,6 +159,7 @@ namespace Nhom3_QLBanGiay.Controllers
         /// Cập nhật
         [Route("/updatecart", Name = "updatecart")]
         [HttpPost]
+        [Authentication]
         public IActionResult UpdateCart(string maSanPham, int quantity)
         {
             // Cập nhật Cart thay đổi số lượng quantity ...
@@ -179,6 +188,29 @@ namespace Nhom3_QLBanGiay.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+
+
+        public IActionResult Vote(SanPham sp)
+        {
+            if(sp != null)
+            {
+                SanPham sanp = db.SanPhams.SingleOrDefault(x => x.MaSanPham == sp.MaSanPham);
+                double vote = sanp.Vote;
+                int soluotVote = sanp.SoLuotVot;
+                if (sp.Vote != null)
+                {
+                    double voteNew = (vote * soluotVote + double.Parse(sp.Vote.ToString()))/(soluotVote + 1);
+                    int soluotVoteNew = soluotVote + 1;
+                    sanp.Vote = voteNew;
+                    sanp.SoLuotVot = soluotVoteNew;
+                    db.Entry(sanp).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            return RedirectToAction("Shop");
         }
     }
 }
