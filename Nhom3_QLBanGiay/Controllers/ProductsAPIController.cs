@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Drawing;
+using EntityState = Microsoft.EntityFrameworkCore.EntityState;
+using Microsoft.EntityFrameworkCore;
 
 namespace Nhom3_QLBanGiay.Controllers
 {
@@ -121,6 +123,66 @@ namespace Nhom3_QLBanGiay.Controllers
                 db.SaveChanges();
                 return new StatusCodeResult(200);
             }
+        }
+
+
+
+        [HttpPut]
+        [Route("SuaSanPham")]
+        public IActionResult SuaSanPhamAPI([FromBody] SanPham sp)
+        {
+            //var sanPham = db.SanPhams.SingleOrDefault(x => x.MaSanPham == sp.MaSanPham);
+            if(sp == null || sp.MaSanPham == null)
+            {
+                return BadRequest("Null");
+            }
+            else
+            {
+                db.Entry(sp).State=EntityState.Modified;
+                try
+                {
+                    db.SaveChanges();
+                    return new StatusCodeResult(200);
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    return BadRequest("Sửa bị lỗi");
+                }
+            }
+
+        }
+
+        [HttpPost]
+        [Route("ThemSanPham")]
+        public IActionResult ThemSanPhamAPI([FromBody] SanPham sp)
+        {
+            //var sanPham = db.SanPhams.SingleOrDefault(x => x.MaSanPham == sp.MaSanPham);
+            if (sp == null || sp.MaSanPham == null)
+            {
+                return new StatusCodeResult(404);
+            }
+            else
+            {
+                bool exit1 = db.SanPhams.Any(x => x.MaSanPham == sp.MaSanPham);
+                if (exit1)
+                {
+                    return new StatusCodeResult(404);
+                }
+                else
+                {
+                    db.SanPhams.Add(sp);
+                    try
+                    {
+                        db.SaveChanges();
+                        return new StatusCodeResult(200);
+                    }
+                    catch (DbUpdateConcurrencyException)
+                    {
+                        return new StatusCodeResult(500);
+                    }
+                }
+            }
+
         }
     }
 }

@@ -1,0 +1,89 @@
+﻿@model Nhom3_QLBanGiay.Models.SanPham
+
+@{
+    ViewData["Title"] = "AddByAPI";
+    Layout = "~/Views/Shared/_LayoutShoes.cshtml";
+}
+
+<h1>AddByAPI</h1>
+
+<h4>SanPham</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form id="formAdd">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MaSanPham" class="control-label"></label>
+                <input asp-for="MaSanPham" class="form-control" />
+                <span asp-validation-for="MaSanPham" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TenSanPham" class="control-label"></label>
+                <input asp-for="TenSanPham" class="form-control" />
+                <span asp-validation-for="TenSanPham" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ChatLieu" class="control-label"></label>
+                <input asp-for="ChatLieu" class="form-control" />
+                <span asp-validation-for="ChatLieu" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GiaNhap" class="control-label"></label>
+                <input asp-for="GiaNhap" class="form-control" />
+                <span asp-validation-for="GiaNhap" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GiaBan" class="control-label"></label>
+                <input asp-for="GiaBan" class="form-control" />
+                <span asp-validation-for="GiaBan" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HinhAnhAvatar" class="control-label"></label>
+                <input asp-for="HinhAnhAvatar" class="form-control" />
+                <span asp-validation-for="HinhAnhAvatar" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaLoaiSp" class="control-label"></label>
+                <select asp-for="MaLoaiSp" class ="form-control" asp-items="ViewBag.MaLoaiSp"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaDoiTuongMh" class="control-label"></label>
+                <select asp-for="MaDoiTuongMh" class ="form-control" asp-items="ViewBag.MaDoiTuongMh"></select>
+            </div>
+            <div class="form-group">
+                <button type="submit"  class="btn btn-primary" >Add</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    document.querySelector('#formAdd').addEventListener('submit', function (event) {
+        event.preventDefault(); // ngăn chặn form gửi dữ liệu
+
+        const formData = new FormData(this);
+        const data = {};
+
+        for (let [key, value] of formData.entries()) {
+            data[key] = value;
+        }
+
+        let response = fetch('https://localhost:7251/api/productsapi/ThemSanPham/', {
+            method: 'post',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+                .then(response => {
+                    if (response.ok) {
+                        alert('Thêm sản phẩm thành công');
+                        location.reload();
+                    } else {
+                        alert('Thêm sản phẩm không thành công');
+                    }
+                })
+            .catch(error =>  console.error(error));
+    });
+</script>

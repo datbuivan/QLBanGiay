@@ -1,6 +1,8 @@
 ﻿using Azure;
 using Bai2.Models.Authentication;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using Nhom3_QLBanGiay.Models;
 using System.Data.Entity;
@@ -80,6 +82,31 @@ namespace Nhom3_QLBanGiay.Controllers
             ViewBag.MaLoaiSp = MaLoai;
             return View(lst);
         }
+
+
+        public IActionResult AddByAPI()
+        {
+            ViewBag.MaSanPham = new SelectList(db.SanPhams, "MaSanPham", "MaSanPham");
+            ViewBag.MaLoaiSp = new SelectList(db.LoaiSps, "MaLoaiSp", "TenLoaiSp");
+            ViewBag.MaDoiTuongMh = new SelectList(db.DoiTuongMhs, "MaDoiTuongMh", "TenDoiTuongMh");
+            return View();
+        }
+
+        public IActionResult DeleteByAPI()
+        {
+            ViewBag.SP = db.SanPhams.ToList();
+            return View();
+        }
+
+        public IActionResult UpdateByAPI()
+        {
+            ViewBag.MaSanPham = new SelectList(db.SanPhams, "MaSanPham", "MaSanPham");
+            ViewBag.MaLoaiSp = new SelectList(db.LoaiSps, "MaLoaiSp", "TenLoaiSp");
+            ViewBag.MaDoiTuongMh = new SelectList(db.DoiTuongMhs, "MaDoiTuongMh", "TenDoiTuongMh");
+            return View();
+        }
+
+
         public const string CARTKEY = "cart";
 
         // Lấy cart từ Session (danh sách CartItem)
@@ -184,6 +211,8 @@ namespace Nhom3_QLBanGiay.Controllers
             return View();
         }
 
+    
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
@@ -194,14 +223,14 @@ namespace Nhom3_QLBanGiay.Controllers
 
         public IActionResult Vote(SanPham sp)
         {
-            if(sp != null)
+            if (sp != null)
             {
                 SanPham sanp = db.SanPhams.SingleOrDefault(x => x.MaSanPham == sp.MaSanPham);
-                double vote = sanp.Vote;
-                int soluotVote = sanp.SoLuotVot;
+                double vote = (double)sanp.Vote;
+                int soluotVote = (int)sanp.SoLuotVot;
                 if (sp.Vote != null)
                 {
-                    double voteNew = (vote * soluotVote + double.Parse(sp.Vote.ToString()))/(soluotVote + 1);
+                    double voteNew = (vote * soluotVote + double.Parse(sp.Vote.ToString())) / (soluotVote + 1);
                     int soluotVoteNew = soluotVote + 1;
                     sanp.Vote = voteNew;
                     sanp.SoLuotVot = soluotVoteNew;
