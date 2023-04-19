@@ -9,8 +9,6 @@
 @model X.PagedList.IPagedList<SanPham>
 
 
-
-
 <div class="content-wrapper">
     <div class="row w-100 m-0">
         <div class="col-lg-12 stretch-card">
@@ -21,8 +19,12 @@
                             <h4 class="card-title ml-4" style="font-size:24px;">Trang chủ / Danh sách sản phẩm</h4>
                         </div>
                         <div class="col-md-6 d-flex justify-content-end">
-                            <a class="btn btn-info mr-3" asp-action="ThemSanPham"><i class="ti-plus"></i></a>
-                            <form asp-action="XoaSanPham">
+                           @* <a class="btn btn-info mr-3" asp-action="ThemSanPham"><i class="ti-plus"></i></a>*@
+                            <a class="btn btn-info mr-3" asp-controller="Home" asp-action="AddByAPI"><i class="ti-plus"></i></a>
+                            <a  class="btn btn-danger"  asp-controller="Home" asp-action="DeleteByAPI">
+                                <i class="ti-trash"></i>
+                            </a>
+                            @*<form asp-action="XoaSanPham">
                                 @for (var i=0;i<Model.Count;i++)
                                 {
                                     <input class="inputMaSM" type="hidden" asp-for="@Model[i].MaSanPham" disabled/>
@@ -50,7 +52,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </form>
+                            </form>*@
                         </div>
                     </div>
                     @if (TempData["Msg"] != null && TempData["Msg"].ToString() != "")
@@ -93,9 +95,13 @@
                                             <a asp-action="ThemCTSanPham" asp-route-masp="@sp.MaSanPham" class="badge badge-info">
                                                 <i class="ti-plus"></i>
                                             </a>
-                                            <a asp-action="SuaSanPham" asp-route-masp="@sp.MaSanPham" class="badge badge-success">
+                                           @* <a asp-action="SuaSanPham" asp-route-masp="@sp.MaSanPham" class="badge badge-success">
+                                                <i class="ti-pencil-alt"></i>
+                                            </a>*@
+                                            <a asp-controller="Home" asp-action="UpdateByAPI"  class="badge badge-success">
                                                 <i class="ti-pencil-alt"></i>
                                             </a>
+                                           
                                             <a asp-action="XoaCTSanPham" asp-route-masp="@sp.MaSanPham" class="badge badge-danger">
                                                 <i class="ti-trash"></i>
                                             </a>
@@ -122,12 +128,7 @@
     </div>
 </div>
 
-@*<script>
-    document.querySelector('.btn-deleteOk').addEventListener('click', function () {
-        location.reload();
-    });
-</script>
-*@
+
 <script>
 
     const checkAll = document.querySelector('#checkAll');

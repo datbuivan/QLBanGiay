@@ -1,17 +1,19 @@
 ﻿@model Nhom3_QLBanGiay.Models.SanPham
 @{
-    ViewData["Title"] = "deleteByAPI";
+    ViewData["Title"] = "DeleteByAPI";
     Layout = "~/Views/Shared/_LayoutShoes.cshtml";
 }
-
-<form id="formElem">
+<h4 style="text-align:center">DeleteByAPI</h4>
+<form style="display: flex;
+    width: 500px;
+    margin:60px auto;" id="formElem">
     <select name="id">
         @foreach (var item in ViewBag.SP)
         {
             <option value="@item.MaSanPham">@item.TenSanPham</option>
         }
     </select>
-    <input type="submit" value="Xóa" class="btn btn-danger" /> |
+    <input type="submit" value="Xóa" class="btn btn-danger" /> 
 </form>
 
 <script>
@@ -31,4 +33,3 @@
         }
     };
 </script>
-

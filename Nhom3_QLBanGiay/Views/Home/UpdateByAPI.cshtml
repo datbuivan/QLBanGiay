@@ -1,22 +1,21 @@
-﻿@model Nhom3_QLBanGiay.Models.SanPham
+﻿
+@model Nhom3_QLBanGiay.Models.SanPham
 
 @{
     ViewData["Title"] = "UpdateByAPI";
     Layout = "~/Views/Shared/_LayoutShoes.cshtml";
 }
 
-<h1>UpdateByAPI</h1>
+<h4 style="text-align:center">UpdateByAPI</h4>
 
 
-
-<h4>SanPham</h4>
 <hr />
-<div class="row">
+<div style="justify-content: center;" class="row">
     <div class="col-md-4">
         <form id="formUpdate">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="MaSanPham"  class="control-label"></label>
+                <label asp-for="MaSanPham" class="control-label"></label>
                 <select asp-for="MaSanPham" class="form-control" asp-items="ViewBag.MaSanPham"></select>
                 <span asp-validation-for="MaSanPham" class="text-danger"></span>
             </div>
@@ -74,7 +73,7 @@
             data[key] = value;
         }
 
-         fetch('https://localhost:7251/api/productsapi/SuaSanPham/', {
+        fetch('https://localhost:7251/api/productsapi/SuaSanPham/', {
             method: 'PUT',
             body: JSON.stringify(data),
             headers: {
@@ -93,3 +92,4 @@
 
     });
 </script>
+

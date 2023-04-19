@@ -1,22 +1,21 @@
 ﻿@model Nhom3_QLBanGiay.Models.SanPham
-
 @{
     ViewData["Title"] = "AddByAPI";
     Layout = "~/Views/Shared/_LayoutShoes.cshtml";
 }
 
-<h1>AddByAPI</h1>
 
-<h4>SanPham</h4>
+<h4 style="text-align:center">AddByAPI</h4>
+
 <hr />
-<div class="row">
+<div style="justify-content: center;" class="row">
     <div class="col-md-4">
         <form id="formAdd">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="MaSanPham" class="control-label"></label>
                 <input asp-for="MaSanPham" class="form-control" />
-                <span asp-validation-for="MaSanPham" class="text-danger"></span>
+               <span asp-validation-for="MaSanPham" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="TenSanPham" class="control-label"></label>
@@ -45,14 +44,14 @@
             </div>
             <div class="form-group">
                 <label asp-for="MaLoaiSp" class="control-label"></label>
-                <select asp-for="MaLoaiSp" class ="form-control" asp-items="ViewBag.MaLoaiSp"></select>
+                <select asp-for="MaLoaiSp" style="width: 100% !important;" class="form-control" asp-items="ViewBag.MaLoaiSp"></select>
             </div>
             <div class="form-group">
                 <label asp-for="MaDoiTuongMh" class="control-label"></label>
-                <select asp-for="MaDoiTuongMh" class ="form-control" asp-items="ViewBag.MaDoiTuongMh"></select>
+                <select asp-for="MaDoiTuongMh" style="width: 100%;" class="form-control" asp-items="ViewBag.MaDoiTuongMh"></select>
             </div>
             <div class="form-group">
-                <button type="submit"  class="btn btn-primary" >Add</button>
+                <button style="margin-top:20px" type="submit" class="btn btn-primary">Add</button>
             </div>
         </form>
     </div>
@@ -76,14 +75,14 @@
                 'Content-Type': 'application/json'
             }
         })
-                .then(response => {
-                    if (response.ok) {
-                        alert('Thêm sản phẩm thành công');
-                        location.reload();
-                    } else {
-                        alert('Thêm sản phẩm không thành công');
-                    }
-                })
-            .catch(error =>  console.error(error));
+            .then(response => {
+                if (response.ok) {
+                    alert('Thêm sản phẩm thành công');
+                    location.reload();
+                } else {
+                    alert('Thêm sản phẩm không thành công');
+                }
+            })
+            .catch(error => console.error(error));
     });
 </script>
