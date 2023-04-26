@@ -125,6 +125,78 @@ namespace Nhom3_QLBanGiay.Controllers
             }
         }
 
+        //[HttpDelete]
+        //[Route("XoaSanPham")]
+        //public IActionResult DeleteSanPham([FromRoute] String []ids)
+        //{
+        //    List<SanPham> lst = new List<SanPham> ();
+        //    bool Del = true;
+        //    if (lst.Count > 0)
+        //    {
+        //        foreach (var id in ids)
+        //        {
+        //            lst.Add(db.SanPhams.SingleOrDefault(x => x.MaSanPham == id));
+        //        }
+        //    }
+        //    if(lst != null && lst.Any())
+        //    {
+        //        foreach(var sp in lst)
+        //        {
+        //            Del = XoaSp(sp.MaSanPham, sp);
+        //        }
+        //    }
+        //    if (Del)
+        //    {
+        //        return new StatusCodeResult(200);
+        //    }
+        //    return NotFound();
+        //}
+
+
+        //public bool XoaSp(string id, SanPham sanPham)
+        //{
+        //    bool exit1 = db.ChiTietHoaDonBans.Any(x => x.MaSanPham == id);
+        //    bool exit2 = db.ChiTietHoaDonNhaps.Any(x => x.MaSanPham == id);
+        //    bool isDelete = true;
+        //    if (exit1 || exit2)
+        //    {
+        //        isDelete = false;
+        //    }
+        //    else
+        //    {
+        //        List<ChiTietSanPham> ctsp = db.ChiTietSanPhams.Where(x => x.MaSanPham == id).ToList();
+        //        List<HinhAnhSp> hasp = db.HinhAnhSps.Where(x => x.MaSanPham == id).ToList();
+        //        if (ctsp != null && ctsp.Any())
+        //        {
+        //            db.ChiTietSanPhams.RemoveRange(ctsp);
+        //            int c = db.SaveChanges();
+        //            if(c <=0 )
+        //            {
+        //                isDelete = false;
+        //            }
+        //        }
+        //        if (hasp != null && hasp.Any())
+        //        {
+        //            db.HinhAnhSps.RemoveRange(hasp);
+        //            int c = db.SaveChanges();
+        //            if (c <= 0)
+        //            {
+        //                isDelete = false;
+        //            }
+        //        }
+        //        if(isDelete)
+        //        {
+        //            db.SanPhams.Remove(sanPham);
+        //            int c = db.SaveChanges();
+        //            if (c <= 0)
+        //            {
+        //                isDelete = false;
+        //            }
+        //        }
+        //    }
+        //    return isDelete;
+        //}
+
 
 
         [HttpPut]

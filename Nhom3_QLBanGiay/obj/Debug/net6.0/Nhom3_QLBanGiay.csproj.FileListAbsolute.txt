@@ -891,3 +891,8 @@ C:\Users\Admin\Documents\QLBanGiay\Nhom3_QLBanGiay\obj\Debug\net6.0\scopedcss\pr
 C:\Users\Admin\Documents\QLBanGiay\Nhom3_QLBanGiay\obj\Debug\net6.0\Nhom3_QLBanGiay.csproj.CopyComplete
 C:\Users\Admin\Documents\QLBanGiay\Nhom3_QLBanGiay\obj\Debug\net6.0\Nhom3_QLBanGiay.genruntimeconfig.cache
 C:\Users\Admin\Documents\QLBanGiay\Nhom3_QLBanGiay\obj\Debug\net6.0\ref\Nhom3_QLBanGiay.dll
+C:\Users\Admin\Documents\QLBanGiay\Nhom3_QLBanGiay\obj\Debug\net6.0\staticwebassets\msbuild.Nhom3_QLBanGiay.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\Admin\Documents\QLBanGiay\Nhom3_QLBanGiay\obj\Debug\net6.0\staticwebassets\msbuild.build.Nhom3_QLBanGiay.props
+C:\Users\Admin\Documents\QLBanGiay\Nhom3_QLBanGiay\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.Nhom3_QLBanGiay.props
+C:\Users\Admin\Documents\QLBanGiay\Nhom3_QLBanGiay\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.Nhom3_QLBanGiay.props
+C:\Users\Admin\Documents\QLBanGiay\Nhom3_QLBanGiay\obj\Debug\net6.0\staticwebassets.pack.json

@@ -19,40 +19,7 @@
                             <h4 class="card-title ml-4" style="font-size:24px;">Trang chủ / Danh sách sản phẩm</h4>
                         </div>
                         <div class="col-md-6 d-flex justify-content-end">
-                           @* <a class="btn btn-info mr-3" asp-action="ThemSanPham"><i class="ti-plus"></i></a>*@
                             <a class="btn btn-info mr-3" asp-controller="Home" asp-action="AddByAPI"><i class="ti-plus"></i></a>
-                            <a  class="btn btn-danger"  asp-controller="Home" asp-action="DeleteByAPI">
-                                <i class="ti-trash"></i>
-                            </a>
-                            @*<form asp-action="XoaSanPham">
-                                @for (var i=0;i<Model.Count;i++)
-                                {
-                                    <input class="inputMaSM" type="hidden" asp-for="@Model[i].MaSanPham" disabled/>
-                                }
-                                <!-- Button trigger modal -->
-                                <button id="deleteSelected" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                    <i class="ti-trash"></i>
-                                </button>
-
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Bạn có muốn xóa?</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                ...
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Thoát</button>
-                                                <button type="submit" class="btn btn-danger">Xóa</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>*@
                         </div>
                     </div>
                     @if (TempData["Msg"] != null && TempData["Msg"].ToString() != "")
@@ -101,10 +68,9 @@
                                             <a asp-controller="Home" asp-action="UpdateByAPI"  class="badge badge-success">
                                                 <i class="ti-pencil-alt"></i>
                                             </a>
-                                           
-                                            <a asp-action="XoaCTSanPham" asp-route-masp="@sp.MaSanPham" class="badge badge-danger">
+                                            <button type="button" onclick="handleDeleteApi('@sp.MaSanPham')" class="badge badge-danger">
                                                 <i class="ti-trash"></i>
-                                            </a>
+                                            </button>
                                         </td>
                                     </tr>
                                 }
@@ -184,4 +150,21 @@
 
 </script>
 
+@*deleteapi*@
+<script>
+    function handleDeleteApi(id) {
+        console.log(id);
+        let response =  fetch('https://localhost:7251/api/productsapi/sanpham/' + id, {
+            method: 'delete'
+        })
+            .then(response => {
+                if (response.ok) {
+                    alert('Xóa sản phẩm thành công');
+                    location.reload();
+                } else {
+                    alert('Sửa sản phẩm không thành công');
+                }
+            })
+    };
+</script>
 
